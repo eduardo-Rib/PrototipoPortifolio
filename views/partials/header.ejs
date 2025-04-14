@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfólio - Eduardo Ribeiro</title>
+    <link rel="stylesheet" href="/css/geral.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <% if (page === 'index') { %>
+    <link rel="stylesheet" href="/css/index.css">
+    <% } else if (page === 'projetos') { %>
+    <link rel="stylesheet" href="/css/projetos.css">
+    <% } else if (page === 'curriculo') { %>
+    <link rel="stylesheet" href="/css/curriculos.css">
+    <% } %>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <h1 class="logo">Eduardo Ribeiro</h1>
+            <nav class="nav-links">
+                <a href="/">Início</a>
+                <a href="/projetos">Projetos</a>
+                <a href="/curriculo">Currículo</a>
+            </nav>
+        </div>
+    </header>
+    <main>

@@ -1,0 +1,40 @@
+.tech-stack {
+    margin: 0.5em 0;
+}
+
+.github-btn {
+    display: inline-block;
+    background-color: #24292e;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 0.4rem;
+}
+
+.github-btn:hover {
+    background-color: #444d56;
+}
+
+.tech-tag {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: #eceff1;
+    color: #333;
+}
+
+.tech-tag.cpp { background-color: #00599C; color: #fff; }
+.tech-tag.python { background-color: #3776AB; color: #fff; }
+.tech-tag.java { background-color: #f89820; color: #fff; }
+.tech-tag.csharp { background-color: #68217A; color: #fff; }
+.tech-tag.flask { background-color: #000; color: #fff; }
+.tech-tag.html { background-color: #e44d26; color: #fff; }
+.tech-tag.css { background-color: #264de4; color: #fff; }
+.tech-tag.js { background-color: #f7df1e; color: #000; }
+.tech-tag.ts { background-color: #007acc; color: #fff; }
+.tech-tag.node { background-color: #68a063; color: #fff; }
+.tech-tag.mysql { background-color: #00758F; color: #fff; }
