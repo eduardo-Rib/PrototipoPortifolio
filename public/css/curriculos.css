@@ -125,3 +125,42 @@
 .habil-tag.ts { background-color: #007acc; color: #fff; }
 .habil-tag.node { background-color: #68a063; color: #fff; }
 .habil-tag.mysql { background-color: #00758F; color: #fff; }
+
+
+.accordion {
+    margin-top: 1rem;
+}
+
+.accordion-item {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-toggle {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    background-color: #f0f4f8;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-toggle:hover {
+    background-color: #e2e8f0;
+}
+
+.accordion-toggle.active {
+    background-color: #dbeafe;
+}
+
+.accordion-content {
+    display: none;
+    padding: 1rem;
+    background-color: #ffffff;
+}
