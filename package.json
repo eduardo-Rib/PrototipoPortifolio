@@ -8,9 +8,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Este é um projeto de portfólio acadêmico desenvolvido como parte da disciplina de **Engenharia de Software II**, com o objetivo de apresentar de forma clara e atrativa a trajetória educacional, habilidades técnicas e projetos relevantes do aluno.",
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardo-Rib/PrototipoPortifolio.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eduardo-Rib/PrototipoPortifolio/issues"
+  },
+  "homepage": "https://github.com/eduardo-Rib/PrototipoPortifolio#readme"
 }
