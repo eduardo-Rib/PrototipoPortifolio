@@ -11,201 +11,112 @@
     <div class="accordion">
 
         <!-- Escolaridade -->
+        <!-- Escolaridade -->
         <div class="accordion-item">
             <button class="accordion-toggle">📘 Escolaridade</button>
             <div class="accordion-content">
+            <% escolaridade.forEach(item => { %>
                 <div class="curriculo-item">
-                    <p><strong>Ensino Médio Técnico - Informática</strong><br>
-                    Colégio Técnico Antônio Teixeira Fernandes (Univap Centro)<br>
-                    <span>Jan/2021 - Dez/2023 | 3 anos</span></p>
-                    <a href="https://www.univap.br/colegios/unidade-centro/cursos/tecnico/informatica" target="_blank" class="btn-link">Ver curso</a>
+                <p><strong><%= item.titulo %></strong><br>
+                <%= item.instituicao %><br>
+                <span><%= item.periodo %></span></p>
+                <a href="<%= item.link %>" target="_blank" class="btn-link">Ver curso</a>
                 </div>
-
-                <div class="curriculo-item">
-                    <p><strong>Ensino Superior - Análise e Desenvolvimento de Sistemas</strong><br>
-                    Fatec São José dos Campos – Prof. Jessen Vidal<br>
-                    <span>Cursando 3º semestre | Matutino | 6 semestres</span></p>
-                    <a href="https://fatecsjc-prd.azurewebsites.net/curso_ads" target="_blank" class="btn-link">Ver curso</a>
-                </div>
+            <% }) %>
             </div>
         </div>
+  
 
         <!-- Cursos -->
         <div class="accordion-item">
             <button class="accordion-toggle">📄 Cursos</button>
             <div class="accordion-content">
                 <ul class="cursos-lista">
+                    <% cursos.forEach(curso => { %>
                     <li>
                         <div class="curso-detalhes">
                             <div class="curso-info">
-                                <strong>Introdução a Análise de Dados com Excel</strong> – Univap Centro (12h)<br>
-                                <span class="curso-data">25/02/2023 a 18/03/2023</span>
+                                <strong><%= curso.titulo %></strong> – <%= curso.instituicao %> (<%= curso.duracao %>)<br>
+                                <span class="curso-data"><%= curso.data %></span>
                             </div>
-                            <a href="/certificados/Analise-de-dados-Excel.pdf" class="btn-link" target="_blank">Ver certificado</a>
+                            <a href="<%= curso.certificado %>" class="btn-link" target="_blank">Ver certificado</a>
                         </div>
                     </li>
-                    <li>
-                        <div class="curso-detalhes">
-                            <div class="curso-info">
-                                <strong>Excel 2016 - Básico</strong> – Fundação Bradesco (15h)<br>
-                                <span class="curso-data">01/02/2024</span>
-                            </div>
-                            <a href="/certificados/Excel-basico.pdf" class="btn-link" target="_blank">Ver certificado</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="curso-detalhes">
-                            <div class="curso-info">
-                                <strong>Word 2016 - Básico</strong> – Fundação Bradesco (9h)<br>
-                                <span class="curso-data">01/02/2024</span>
-                            </div>
-                            <a href="/certificados/Word-basico.pdf" class="btn-link" target="_blank">Ver certificado</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="curso-detalhes">
-                            <div class="curso-info">
-                                <strong>PowerPoint 2016 - Básico</strong> – Fundação Bradesco (8h)<br>
-                                <span class="curso-data">01/02/2024</span>
-                            </div>
-                            <a href="/certificados/PowerPoint-basico.pdf" class="btn-link" target="_blank">Ver certificado</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="curso-detalhes">
-                            <div class="curso-info">
-                                <strong>POO com Python</strong> – Fundação Bradesco (10h)<br>
-                                <span class="curso-data">22/11/2024</span>
-                            </div>
-                            <a href="/certificados/Analise-de-dados-Excel.pdf" class="btn-link" target="_blank">Ver certificado</a>
-                        </div>
-                    </li>
+                    <% }) %>
                 </ul>
             </div>
         </div>
+          
 
         <!-- Eventos -->
         <div class="accordion-item">
-        <button class="accordion-toggle">📅 Eventos</button>
-        <div class="accordion-content">
-        <ul class="cursos-lista">    
-        <li>
-        <div class="curso-detalhes">
-            <div class="curso-info">
-                <strong>10ª Maratona de Programação Júnior</strong><br>
-                <span class="curso-data">Univap – 2021</span>
-            </div>
-        </div>
-        </li>
-        <li>
-        <div class="curso-detalhes">
-            <div class="curso-info">
-                <strong>11ª Maratona de Programação Júnior</strong><br>
-                <span class="curso-data">Univap – 2022</span>
-            </div>
-        </div>
-        </li>
-        <li>
-        <div class="curso-detalhes">
-            <div class="curso-info">
-                <strong>12ª Maratona de Programação Júnior</strong><br>
-                <span class="curso-data">Univap – 2023</span>
-            </div>
-        </div>
-        </li>
-        <li>
-        <div class="curso-detalhes">
-            <div class="curso-info">
-                <strong>Autocom</strong><br>
-                <span class="curso-data">2025</span>
-            </div>
-        </div>
-        </li>
-        </ul>
-        </div>
-        </div>
-
-        <!-- Experiência -->
-        <div class="accordion-item">
-            <button class="accordion-toggle">💼 Experiência Profissional</button>
+            <button class="accordion-toggle">📅 Eventos</button>
             <div class="accordion-content">
-                <ul class="cursos-lista">   
+                <ul class="cursos-lista">
+                    <% eventos.forEach(evento => { %>
                     <li>
                         <div class="curso-detalhes">
                             <div class="curso-info">
-                                <strong>SENTRAN</strong><br>
-                                <span class="curso-data"> Jovem Aprendiz – Técnico em TI</span><br>
-                                <span class="curso-data">Jan/2024 a Mar/2024</span>
+                                <strong><%= evento.nome %></strong><br>
+                                <span class="curso-data"><%= evento.local ? evento.local + ' – ' : '' %><%= evento.ano %></span>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="curso-detalhes">
-                            <div class="curso-info">
-                                <strong>Colégio Univap Centro</strong><br>
-                                <span class="curso-data"> Estagiário de Informática </span> <br>
-                                <span class="curso-data">Ago/2024 a Dez/2024</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="curso-detalhes">
-                            <div class="curso-info">
-                                <strong>Sistema Pallas</strong><br>
-                                <span class="curso-data"> Estagiário de suporte </span> <br>
-                                <span class="curso-data">Desde Fev/2025</span>
-                            </div>
-                        </div>
-                    </li>
+                    <% }) %>
                 </ul>
             </div>
         </div>
+          
 
         <div class="accordion-item">
-        <button class="accordion-toggle">🧠 Habilidades</button>
+            <button class="accordion-toggle">💼 Experiência Profissional</button>
+            <div class="accordion-content">
+                <ul class="cursos-lista">
+                    <% experiencias.forEach(exp => { %>
+                    <li>
+                        <div class="curso-detalhes">
+                            <div class="curso-info">
+                                <strong><%= exp.empresa %></strong><br>
+                                <span class="curso-data"><%= exp.cargo %></span><br>
+                                <span class="curso-data"><%= exp.periodo %></span>
+                            </div>
+                        </div>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+          
+
+        <div class="accordion-item">
+            <button class="accordion-toggle">🧠 Habilidades</button>
             <div class="accordion-content">
                 <div class="habilidades-box">
                     <h4>Habilidades Técnicas</h4>
                     <div class="habilidades-tags">
-                        <span class="habil-tag">Lógica de programação</span>
-                        <span class="habil-tag">Redes de computadores</span>
-                        <span class="habil-tag">Sistemas operacionais</span>
-                        <span class="habil-tag">Hardware de computadores</span>
+                        <% habilidades.tecnicas.forEach(tag => { %>
+                        <span class="habil-tag"><%= tag %></span>
+                        <% }) %>
                     </div>
-
+          
                     <h4>Soft Skills</h4>
                     <div class="habilidades-tags">
-                        <span class="habil-tag">Proatividade</span>
-                        <span class="habil-tag">Trabalho em Equipe</span>
-                        <span class="habil-tag">Comunicação</span>
-                        <span class="habil-tag">Adaptabilidade</span>
-                        <span class="habil-tag">Gestão de tempo</span>
-                        <span class="habil-tag">Resolução de problemas</span>
-                        <span class="habil-tag">Pensamento crítico</span>
-                        <span class="habil-tag">Empatia</span>
-                        <span class="habil-tag">Feedback</span>
-                        <span class="habil-tag">Autodisciplina</span>
-                        <span class="habil-tag">Inteligência emocional</span>
-                        <span class="habil-tag">Raciocínio lógico</span>
-                    </div>  
-
+                        <% habilidades.softskills.forEach(tag => { %>
+                            <span class="habil-tag"><%= tag %></span>
+                        <% }) %>
+                    </div>
+          
                     <h4>Ferramentas</h4>
                     <div class="habilidades-tags">
-                        <span class="habil-tag cpp">C++</span>
-                        <span class="habil-tag python">Python</span>
-                        <span class="habil-tag java">Java</span>
-                        <span class="habil-tag csharp">C#</span>
-                        <span class="habil-tag flask">Flask</span>
-                        <span class="habil-tag html">HTML</span>
-                        <span class="habil-tag css">CSS</span>
-                        <span class="habil-tag js">JavaScript</span>
-                        <span class="habil-tag ts">TypeScript</span>
-                        <span class="habil-tag node">Node.js</span>
-                        <span class="habil-tag mysql">MySQL</span>
+                        <% habilidades.ferramentas.forEach(tag => { %>
+                        <span class="habil-tag <%= tag.classe %>"><%= tag.nome %></span>
+                        <% }) %>
                     </div>
+
                 </div>
             </div>
         </div>
+          
 
   </div>
 </section>

@@ -121,8 +121,8 @@
 .habil-tag.flask { background-color: #000; color: #fff; }
 .habil-tag.html { background-color: #e44d26; color: #fff; }
 .habil-tag.css { background-color: #264de4; color: #fff; }
-.habil-tag.js { background-color: #f7df1e; color: #000; }
-.habil-tag.ts { background-color: #007acc; color: #fff; }
+.habil-tag.javascript { background-color: #f7df1e; color: #000; }
+.habil-tag.typescript { background-color: #007acc; color: #fff; }
 .habil-tag.node { background-color: #68a063; color: #fff; }
 .habil-tag.mysql { background-color: #00758F; color: #fff; }
 
