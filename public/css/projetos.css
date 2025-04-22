@@ -34,7 +34,7 @@
 .tech-tag.flask { background-color: #000; color: #fff; }
 .tech-tag.html { background-color: #e44d26; color: #fff; }
 .tech-tag.css { background-color: #264de4; color: #fff; }
-.tech-tag.js { background-color: #f7df1e; color: #000; }
-.tech-tag.ts { background-color: #007acc; color: #fff; }
+.tech-tag.javascript { background-color: #f7df1e; color: #000; }
+.tech-tag.typescript { background-color: #007acc; color: #fff; }
 .tech-tag.node { background-color: #68a063; color: #fff; }
 .tech-tag.mysql { background-color: #00758F; color: #fff; }

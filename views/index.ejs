@@ -1,42 +1,42 @@
 <%- include('partials/header') %>
 
 <section class="intro">
-    <div class="intro-container">
-        <div class="intro-image">
-            <img src="/images/self-portifolio.jpeg" alt="Foto de Eduardo Fonseca Ribeiro">
-        </div>
-        <div class="intro-text">
-            <h2>Eduardo Fonseca Ribeiro</h2>
-            <p>Tenho 19 anos, moro em São José dos Campos e sou estudante de Análise e Desenvolvimento de Sistemas na FATEC - Prof. Jessen Vidal. Atualmente estou no 3º semestre do curso, me interesso por tecnologia, e estou em busca de aprimoramento contínuo em áreas como desenvolvimento backend e inteligência artificial.</p>
-        </div>
+  <div class="intro-container">
+    <div class="intro-image">
+      <img src="<%= introducao.imagem %>" alt="Foto de <%= introducao.nome %>">
     </div>
+    <div class="intro-text">
+      <h2><%= nome %></h2>
+      <p>
+        <%= introducao.bio %>
+      </p>
+    </div>
+  </div>
 </section>
-
 
 <section>
     <h2>Contato</h2>
     <div class="contato-box">
+      
+      <% contatos.emails.forEach(email => { %>
         <div class="contato-tag">
-            <strong>Email pessoal:</strong>
-            <span>eduardo10122005@gmail.com</span>
+          <strong>Email <%= email.classe %>:</strong>
+          <span><%= email.nome %></span>
         </div>
-        <div class="contato-tag">
-            <strong>Email acadêmico:</strong>
-            <span>eduardo.ribeiro37@fatec.sp.gov.br</span>
-        </div>
-        <div class="contato-tag">
-            <strong>Email profissional:</strong>
-            <span>eduardo@sistemapallas.com.br</span>
-        </div>
-        <div class="contato-tag">
-            <strong>WhatsApp:</strong>
-            <span>+55 12 99608-2242</span>
-        </div>
-        <div class="contato-links">
-            <a href="https://www.linkedin.com/in/eduardo-ribeiro-4b78002b2" target="_blank" class="linkedin-btn">LinkedIn</a>
-            <a href="https://github.com/eduardo-rib" target="_blank" class="github-btn">GitHub</a>
-        </div>
+      <% }) %>
+  
+      <div class="contato-tag">
+        <strong>WhatsApp:</strong>
+        <span><%= contatos.whatsapp %></span>
+      </div>
+  
+      <div class="contato-links">
+        <% contatos.links.forEach(link => { %>
+          <a href="<%= link.url %>" target="_blank" class="<%= link.classe %>"><%= link.nome %></a>
+        <% }) %>
+      </div>
+      
     </div>
-</section>
+  </section>  
 
 <%- include('partials/footer') %>
