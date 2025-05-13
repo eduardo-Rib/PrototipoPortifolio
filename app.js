@@ -1,237 +1,48 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const path = require('path');
+const db = require('./db');
+
+const { getCurriculoData } = require('./models/curriculoModel');
+const { getProjetos } = require('./models/projetosModel');
+const { getIndexData } = require('./models/indexModel');
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
- 
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
-// =-=-=-=-=-=-=-=-=-= Rota para o index =-=-=-=-=-=-=-=-=-=
-
-
-app.get('/', (req, res) => {
-  const introducao = {
-    bio: 'Tenho 19 anos, moro em São José dos Campos e sou estudante de Análise e Desenvolvimento de Sistemas na FATEC - Prof. Jessen Vidal. Atualmente estou no 3º semestre do curso, me interesso por tecnologia, e estou em busca de aprimoramento contínuo em áreas como desenvolvimento backend e inteligência artificial.',
-    imagem: '/images/self-portifolio.jpeg'
-  };
-
-  const contatos = {
-    emails: [
-      { nome: 'eduardo10122005@gmail.com', classe: 'pessoal' },
-      { nome: 'eduardo.ribeiro37@fatec.sp.gov.br', classe: 'acadêmico' },
-      { nome: 'eduardo@sistemapallas.com.br', classe: 'profissional' }
-    ],
-    whatsapp: '+55 12 99608-2242',
-    links: [
-      { nome: 'LinkedIn', url: 'https://www.linkedin.com/in/eduardo-ribeiro-4b78002b2', classe: 'linkedin-btn' },
-      { nome: 'GitHub', url: 'https://github.com/eduardo-rib', classe: 'github-btn' }
-    ]
-  };  
-
+app.get('/', async (req, res) => {
+  const { nome, introducao, contatos } = await getIndexData();
   res.render('index', {
     page: 'index',
+    nome,
     introducao,
     contatos,
-    nome: 'Eduardo Fonseca Ribeiro',
     anoAtual: new Date().getFullYear()
   });
 });
-  
-  
 
-
-  // =-=-=-=-=-=-=-=-=-= Rota para os projetos =-=-=-=-=-=-=-=-=-=
-
-
-app.get('/projetos', (req, res) => {
-  const projetos = [
-    {
-      titulo: 'Desafio-Universidade-Unes',
-      descricao: 'Site sobre a universidade fictícia Unes, com responsividade, Bootstrap e SQL.',
-      tecnologias: [
-        { nome: 'Python', classe: 'python' },
-        { nome: 'Flask', classe: 'flask' },
-        { nome: 'HTML', classe: 'html' },
-        { nome: 'CSS', classe: 'css' },
-        { nome: 'MySQL', classe: 'mysql' }
-      ],
-      link: 'https://github.com/eduardo-Rib/Desafio-Universidade-Unes'
-    },
-    {
-      titulo: 'APIHorus',
-      descricao: 'Site educativo sobre Scrum, com avaliações e quizzes.',
-      tecnologias: [
-        { nome: 'Python', classe: 'python' },
-        { nome: 'Flask', classe: 'flask' },
-        { nome: 'MySQL', classe: 'mysql' },
-        { nome: 'JavaScript', classe: 'javascript' },
-        { nome: 'HTML', classe: 'html' },
-        { nome: 'CSS', classe: 'css' }
-      ],
-      link: 'https://github.com/m-germano/projetoAPI-horus'
-    },
-    {
-      titulo: 'testeOllama',
-      descricao: 'Protótipo de extração de dados de RG via IA.',
-      tecnologias: [
-        { nome: 'Java', classe: 'java' },
-        { nome: 'Ollama', classe: 'ollama' },
-        { nome: 'MiniCPM-V', classe: 'minicpmv' },
-        { nome: 'MySQL', classe: 'mysql' }
-      ],
-      link: 'https://github.com/eduardo-Rib/testeOllama'
-    },
-    {
-      titulo: 'IdScan',
-      descricao: 'Projeto completo de extração de RG com interface gráfica e múltiplas IAs.',
-      tecnologias: [
-        { nome: 'Java', classe: 'java' },
-        { nome: 'Java Effects', classe: 'javaeffects' },
-        { nome: 'Ollama', classe: 'ollama' },
-        { nome: 'Gemma:2b', classe: 'gemma2b' },
-        { nome: 'Tesseract', classe: 'tesseract' },
-        { nome: 'MySQL', classe: 'mysql' }
-      ],
-      link: 'https://github.com/eduardo-Rib/testeOllama'
-    },
-    {
-      titulo: 'InsightFlow',
-      descricao: 'Limpa e analisa dados de importação/exportação do Brasil com gráficos dinâmicos.',
-      tecnologias: [
-        { nome: 'Python', classe: 'python' },
-        { nome: 'Flask', classe: 'flask' },
-        { nome: 'Pandas', classe: 'pandas' },
-        { nome: 'Mathplot', classe: 'mathplot' },
-        { nome: 'TypeScript', classe: 'typescript' },
-        { nome: 'JavaScript', classe: 'javascript' },
-        { nome: 'Node', classe: 'node' },
-        { nome: 'PostgreSQL', classe: 'postgresql' }
-      ],
-      link: 'https://github.com/Titus-System/InsightFlow'
-    }
-  ];
-
+app.get('/projetos', async (req, res) => {
+  const projetos = await getProjetos();
   res.render('projetos', {
     page: 'projetos',
     nome: 'Eduardo Fonseca Ribeiro',
-    anoAtual: new Date().getFullYear(),
-    projetos
-  });
-});
-  
-  
-  
-
-
-
-
-// =-=-=-=-=-=-=-=-=-= Rota para o curriculo =-=-=-=-=-=-=-=-=-=
-
-
-app.get('/curriculo', (req, res) => {
-  const escolaridade = [
-    {
-      titulo: 'Ensino Médio Técnico - Informática',
-      instituicao: 'Colégio Técnico Antônio Teixeira Fernandes (Univap Centro)',
-      periodo: 'Jan/2021 - Dez/2023 | 3 anos',
-      link: 'https://www.univap.br/colegios/unidade-centro/cursos/tecnico/informatica'
-    },
-    {
-      titulo: 'Ensino Superior - Análise e Desenvolvimento de Sistemas',
-      instituicao: 'Fatec São José dos Campos – Prof. Jessen Vidal',
-      periodo: 'Cursando 3º semestre | Matutino | 6 semestres',
-      link: 'https://fatecsjc-prd.azurewebsites.net/curso_ads'
-    }
-  ];
-
-  const cursos = [
-    {
-      titulo: 'Introdução a Análise de Dados com Excel',
-      instituicao: 'Univap Centro',
-      duracao: '12h',
-      data: '25/02/2023 a 18/03/2023',
-      certificado: '/certificados/Analise-de-dados-Excel.pdf'
-    },
-    {
-      titulo: 'Excel 2016 - Básico',
-      instituicao: 'Fundação Bradesco',
-      duracao: '15h',
-      data: '01/02/2024',
-      certificado: '/certificados/Excel-basico.pdf'
-    },
-    {
-      titulo: 'Word 2016 - Básico',
-      instituicao: 'Fundação Bradesco',
-      duracao: '9h',
-      data: '01/02/2024',
-      certificado: '/certificados/Word-basico.pdf'
-    },
-    {
-      titulo: 'PowerPoint 2016 - Básico',
-      instituicao: 'Fundação Bradesco',
-      duracao: '8h',
-      data: '01/02/2024',
-      certificado: '/certificados/PowerPoint-basico.pdf'
-    },
-    {
-      titulo: 'POO com Python',
-      instituicao: 'Fundação Bradesco',
-      duracao: '10h',
-      data: '22/11/2024',
-      certificado: '/certificados/Analise-de-dados-Excel.pdf'
-    }
-  ];
-
-  const eventos = [
-    { nome: '10ª Maratona de Programação Júnior', local: 'Univap', ano: '2021' },
-    { nome: '11ª Maratona de Programação Júnior', local: 'Univap', ano: '2022' },
-    { nome: '12ª Maratona de Programação Júnior', local: 'Univap', ano: '2023' },
-    { nome: 'Autocom', local: '', ano: '2025' }
-  ];
-
-  const experiencias = [
-    { empresa: 'SENTRAN', cargo: 'Jovem Aprendiz – Técnico em TI', periodo: 'Jan/2024 a Mar/2024' },
-    { empresa: 'Colégio Univap Centro', cargo: 'Estagiário de Informática', periodo: 'Ago/2024 a Dez/2024' },
-    { empresa: 'Sistema Pallas', cargo: 'Estagiário de suporte', periodo: 'Desde Fev/2025' }
-  ];
-
-  const habilidades = {
-    tecnicas: ['Lógica de programação', 'Redes de computadores', 'Sistemas operacionais', 'Hardware de computadores'],
-    softskills: [
-      'Proatividade', 'Trabalho em Equipe', 'Comunicação', 'Adaptabilidade', 'Gestão de tempo',
-      'Resolução de problemas', 'Pensamento crítico', 'Empatia', 'Feedback',
-      'Autodisciplina', 'Inteligência emocional', 'Raciocínio lógico'
-    ],
-    ferramentas: [
-      { nome: 'C++', classe: 'cpp' },
-      { nome: 'Python', classe: 'python' },
-      { nome: 'Java', classe: 'java' },
-      { nome: 'C#', classe: 'csharp' },
-      { nome: 'Flask', classe: 'flask' },
-      { nome: 'HTML', classe: 'html' },
-      { nome: 'CSS', classe: 'css' },
-      { nome: 'JavaScript', classe: 'javascript' },
-      { nome: 'TypeScript', classe: 'typescript' },
-      { nome: 'Node.js', classe: 'node' },
-      { nome: 'MySQL', classe: 'mysql' }
-    ]      
-  };
-
-  res.render('curriculo', {
-    page: 'curriculo',
-    escolaridade,
-    cursos,
-    eventos,
-    experiencias,
-    habilidades,
-    nome: 'Eduardo Fonseca Ribeiro',
+    projetos,
     anoAtual: new Date().getFullYear()
   });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+app.get('/curriculo', async (req, res) => {
+  const dados = await getCurriculoData();
+  res.render('curriculo', {
+    page: 'curriculo',
+    nome: 'Eduardo Fonseca Ribeiro',
+    ...dados,
+    anoAtual: new Date().getFullYear()
+  });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Servidor rodando em: http://localhost:${PORT}`);
 });
