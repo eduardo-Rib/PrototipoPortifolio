@@ -48,12 +48,33 @@ app.get('/curriculo', async (req, res) => {
 
 // Rotas API para edição dinâmica
 
-app.get('/curriculo', async (req, res) => {
+app.get('/adm/curriculo', async (req, res) => {
   const dados = await getCurriculoData();
-  res.render('curriculo', {
+  res.render('editCurricul', {
     page: 'curriculo',
     nome: 'Eduardo Fonseca Ribeiro',
     ...dados,
+    anoAtual: new Date().getFullYear()
+  });
+});
+
+app.get('/adm', async (req, res) => {
+  const { nome, introducao, contatos } = await getIndexData();
+  res.render('editIndex', {
+    page: 'index',
+    nome,
+    introducao,
+    contatos,
+    anoAtual: new Date().getFullYear()
+  });
+});
+
+app.get('/adm/projetos', async (req, res) => {
+  const projetos = await getProjetos();
+  res.render('editProjetos', {
+    page: 'projetos',
+    nome: 'Eduardo Fonseca Ribeiro',
+    projetos,
     anoAtual: new Date().getFullYear()
   });
 });
