@@ -1,0 +1,86 @@
+<%- include('partials/header') %>
+
+<h2>Projetos Acadêmicos</h2>
+
+<div id="projetos-container">
+  <% projetos.forEach(proj => { %>
+    <section class="projeto-item">
+      <h3><%= proj.titulo %></h3>
+      <p><%= proj.descricao %></p>
+      <div class="tech-stack">
+        <% proj.tecnologias.forEach(tec => { %>
+          <span class="tech-tag <%= tec.classe %>"><%= tec.nome %></span>
+        <% }) %>
+      </div>
+      <a href="<%= proj.link %>" target="_blank" class="github-btn">Ver no GitHub</a>
+      <button onclick="editItem(this)">Editar</button>
+      <button onclick="deleteItem(this)">Excluir</button>
+    </section>
+  <% }) %>
+</div>
+
+<div class="form-inline">
+  <h4>Adicionar Projeto</h4>
+  <input type="text" placeholder="Título">
+  <input type="text" placeholder="Descrição">
+  <input type="text" placeholder="Tecnologias (separadas por vírgula)">
+  <input type="text" placeholder="Link do GitHub">
+  <button onclick="addProjeto()">Adicionar Projeto</button>
+</div>
+
+<script>
+function editItem(btn) {
+  const parent = btn.parentElement;
+  const elements = parent.querySelectorAll("h3, p, span, a");
+  elements.forEach(el => {
+    if (el.tagName === 'SPAN') return;
+    const input = document.createElement("input");
+    input.value = el.textContent || el.innerText;
+    el.replaceWith(input);
+  });
+  btn.textContent = "Salvar";
+  btn.onclick = () => saveItem(btn);
+}
+
+function saveItem(btn) {
+  const parent = btn.parentElement;
+  const inputs = parent.querySelectorAll("input");
+  const [titulo, descricao, link] = inputs;
+  const techStack = parent.querySelector(".tech-stack");
+  techStack.innerHTML = '<span class="tech-tag">(editar separado)</span>';
+  const h3 = document.createElement("h3"); h3.textContent = titulo.value;
+  const p = document.createElement("p"); p.textContent = descricao.value;
+  const a = document.createElement("a");
+  a.href = link.value; a.className = "github-btn"; a.target = "_blank"; a.textContent = "Ver no GitHub";
+  inputs[0].replaceWith(h3);
+  inputs[1].replaceWith(p);
+  inputs[2].replaceWith(a);
+  btn.textContent = "Editar";
+  btn.onclick = () => editItem(btn);
+}
+
+function deleteItem(btn) {
+  btn.parentElement.remove();
+}
+
+function addProjeto() {
+  const container = document.getElementById("projetos-container");
+  const inputs = document.querySelectorAll(".form-inline input");
+  const [titulo, descricao, tecnologias, link] = Array.from(inputs).map(i => i.value);
+  const techTags = tecnologias.split(',').map(tec => `<span class="tech-tag">${tec.trim()}</span>`).join(' ');
+  const section = document.createElement("section");
+  section.className = "projeto-item";
+  section.innerHTML = `
+    <h3>${titulo}</h3>
+    <p>${descricao}</p>
+    <div class="tech-stack">${techTags}</div>
+    <a href="${link}" target="_blank" class="github-btn">Ver no GitHub</a>
+    <button onclick="editItem(this)">Editar</button>
+    <button onclick="deleteItem(this)">Excluir</button>
+  `;
+  container.appendChild(section);
+  inputs.forEach(i => i.value = "");
+}
+</script>
+
+<%- include('partials/footer') %>
