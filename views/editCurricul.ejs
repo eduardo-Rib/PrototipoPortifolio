@@ -1,0 +1,125 @@
+<%- include('partials/header') %>
+
+<section class="curriculo">
+  <div class="titulo-curriculo">
+    <h2>Currículo</h2>
+    <a href="/Curriculo/Curriculo.pdf" class="btn-download" target="_blank">📄 Baixar PDF</a>
+  </div>
+
+  <!-- Escolaridade -->
+  <div class="accordion-item">
+    <button class="accordion-toggle">📘 Escolaridade</button>
+    <div class="accordion-content" id="escolaridade-container">
+      <% escolaridade.forEach(item => { %>
+        <div class="curriculo-item">
+          <p><strong><%= item.titulo %></strong><br>
+            <%= item.instituicao %><br>
+            <span><%= item.periodo %></span>
+          </p>
+          <a href="<%= item.link %>" target="_blank" class="btn-link">Ver curso</a>
+          <button onclick="editItem(this)">Editar</button>
+          <button onclick="deleteItem(this)">Excluir</button>
+        </div>
+      <% }) %>
+    </div>
+    <div class="form-inline">
+      <input type="text" placeholder="Título">
+      <input type="text" placeholder="Instituição">
+      <input type="text" placeholder="Período">
+      <input type="text" placeholder="Link">
+      <button onclick="addEscolaridade()">Adicionar</button>
+    </div>
+  </div>
+
+  <!-- Repita esse padrão para Cursos, Eventos, Experiência e Habilidades -->
+  <!-- Exemplo abreviado para Cursos -->
+  <div class="accordion-item">
+    <button class="accordion-toggle">📄 Cursos</button>
+    <div class="accordion-content" id="cursos-container">
+      <% cursos.forEach(curso => { %>
+        <div class="curriculo-item">
+          <p><strong><%= curso.titulo %></strong> – <%= curso.instituicao %> (<%= curso.duracao %>)<br>
+            <span class="curso-data"><%= curso.data %></span>
+          </p>
+          <a href="<%= curso.certificado %>" target="_blank" class="btn-link">Ver certificado</a>
+          <button onclick="editItem(this)">Editar</button>
+          <button onclick="deleteItem(this)">Excluir</button>
+        </div>
+      <% }) %>
+    </div>
+    <div class="form-inline">
+      <input type="text" placeholder="Título">
+      <input type="text" placeholder="Instituição">
+      <input type="text" placeholder="Duração">
+      <input type="text" placeholder="Data">
+      <input type="text" placeholder="Link Certificado">
+      <button onclick="addCurso()">Adicionar</button>
+    </div>
+  </div>
+</section>
+
+<script src="/js/accordion.js"></script>
+<script>
+function editItem(btn) {
+  const parent = btn.parentElement;
+  const spans = parent.querySelectorAll("p, span, a");
+  spans.forEach(el => {
+    const text = el.textContent || el.innerText;
+    const input = document.createElement("input");
+    input.value = text;
+    el.replaceWith(input);
+  });
+  btn.textContent = "Salvar";
+  btn.onclick = () => saveItem(btn);
+}
+
+function saveItem(btn) {
+  const parent = btn.parentElement;
+  const inputs = parent.querySelectorAll("input");
+  inputs.forEach(input => {
+    const span = document.createElement("span");
+    span.textContent = input.value;
+    input.replaceWith(span);
+  });
+  btn.textContent = "Editar";
+  btn.onclick = () => editItem(btn);
+}
+
+function deleteItem(btn) {
+  btn.parentElement.remove();
+}
+
+function addEscolaridade() {
+  const container = document.getElementById("escolaridade-container");
+  const inputs = container.nextElementSibling.querySelectorAll("input");
+  const [titulo, instituicao, periodo, link] = Array.from(inputs).map(i => i.value);
+  const div = document.createElement("div");
+  div.className = "curriculo-item";
+  div.innerHTML = `
+    <p><strong>${titulo}</strong><br>${instituicao}<br><span>${periodo}</span></p>
+    <a href="${link}" target="_blank" class="btn-link">Ver curso</a>
+    <button onclick="editItem(this)">Editar</button>
+    <button onclick="deleteItem(this)">Excluir</button>
+  `;
+  container.appendChild(div);
+  inputs.forEach(i => i.value = "");
+}
+
+function addCurso() {
+  const container = document.getElementById("cursos-container");
+  const inputs = container.nextElementSibling.querySelectorAll("input");
+  const [titulo, instituicao, duracao, data, certificado] = Array.from(inputs).map(i => i.value);
+  const div = document.createElement("div");
+  div.className = "curriculo-item";
+  div.innerHTML = `
+    <p><strong>${titulo}</strong> – ${instituicao} (${duracao})<br><span class="curso-data">${data}</span></p>
+    <a href="${certificado}" target="_blank" class="btn-link">Ver certificado</a>
+    <button onclick="editItem(this)">Editar</button>
+    <button onclick="deleteItem(this)">Excluir</button>
+  `;
+  container.appendChild(div);
+  inputs.forEach(i => i.value = "");
+}
+</script>
+
+<%- include('partials/footer') %>
