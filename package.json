@@ -11,7 +11,8 @@
   "description": "Este é um projeto de portfólio acadêmico desenvolvido como parte da disciplina de **Engenharia de Software II**, com o objetivo de apresentar de forma clara e atrativa a trajetória educacional, habilidades técnicas e projetos relevantes do aluno.",
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
   },
   "repository": {
     "type": "git",
