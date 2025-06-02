@@ -5,12 +5,12 @@ async function getProjetos() {
   const projetos = [];
 
   for (const proj of projetosBase) {
-    const [tecs] = await db.query(\`
+    const [tecs] = await db.query(`
       SELECT t.nome, t.classe
       FROM tecnologiasProjetos tp
       JOIN tecnologias t ON t.codigo = tp.codigoTecnologia
       WHERE tp.codigoProjeto = ?
-    \`, [proj.codigo]);
+    `, [proj.codigo]);
 
     projetos.push({
       titulo: proj.titulo,
