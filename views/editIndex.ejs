@@ -1,0 +1,118 @@
+<%- include('partials/header') %>
+
+<section class="intro">
+  <div class="intro-container">
+    <div class="intro-image">
+      <img src="<%= introducao.imagem %>" alt="Foto de <%= introducao.nome %>">
+    </div>
+    <div class="intro-text">
+      <h2><%= nome %></h2>
+      <p><%= introducao.bio %></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Contato</h2>
+  <div class="contato-box" id="contato-container">
+    <% contatos.emails.forEach(email => { %>
+      <div class="contato-tag">
+        <strong>Email <%= email.classe %>:</strong>
+        <span><%= email.nome %></span>
+        <button onclick="editItem(this)">Editar</button>
+        <button onclick="deleteItem(this)">Excluir</button>
+      </div>
+    <% }) %>
+
+    <div class="contato-tag">
+      <strong>WhatsApp:</strong>
+      <span><%= contatos.whatsapp %></span>
+    </div>
+
+    <div class="contato-links">
+      <% contatos.links.forEach(link => { %>
+        <div>
+          <a href="<%= link.url %>" target="_blank" class="<%= link.classe %>"><%= link.nome %></a>
+          <button onclick="editItem(this)">Editar</button>
+          <button onclick="deleteItem(this)">Excluir</button>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="form-inline">
+    <h4>Adicionar Email</h4>
+    <input type="text" placeholder="Classe">
+    <input type="text" placeholder="Email">
+    <button onclick="addEmail()">Adicionar Email</button>
+
+    <h4>Adicionar Link</h4>
+    <input type="text" placeholder="Nome">
+    <input type="text" placeholder="URL">
+    <input type="text" placeholder="Classe CSS">
+    <button onclick="addLink()">Adicionar Link</button>
+  </div>
+</section>
+
+<script>
+function editItem(btn) {
+  const parent = btn.parentElement;
+  const spans = parent.querySelectorAll("span, a");
+  spans.forEach(el => {
+    const input = document.createElement("input");
+    input.value = el.textContent || el.innerText;
+    el.replaceWith(input);
+  });
+  btn.textContent = "Salvar";
+  btn.onclick = () => saveItem(btn);
+}
+
+function saveItem(btn) {
+  const parent = btn.parentElement;
+  const inputs = parent.querySelectorAll("input");
+  inputs.forEach(input => {
+    const span = document.createElement("span");
+    span.textContent = input.value;
+    input.replaceWith(span);
+  });
+  btn.textContent = "Editar";
+  btn.onclick = () => editItem(btn);
+}
+
+function deleteItem(btn) {
+  btn.parentElement.remove();
+}
+
+function addEmail() {
+  const container = document.getElementById("contato-container");
+  const inputs = document.querySelectorAll(".form-inline input");
+  const classe = inputs[0].value;
+  const nome = inputs[1].value;
+  const div = document.createElement("div");
+  div.className = "contato-tag";
+  div.innerHTML = `<strong>Email ${classe}:</strong> <span>${nome}</span>
+    <button onclick="editItem(this)">Editar</button>
+    <button onclick="deleteItem(this)">Excluir</button>`;
+  container.appendChild(div);
+  inputs[0].value = "";
+  inputs[1].value = "";
+}
+
+function addLink() {
+  const container = document.querySelector(".contato-links");
+  const inputs = document.querySelectorAll(".form-inline input");
+  const nome = inputs[2].value;
+  const url = inputs[3].value;
+  const classe = inputs[4].value;
+  const div = document.createElement("div");
+  div.innerHTML = `<a href="${url}" target="_blank" class="${classe}">${nome}</a>
+    <button onclick="editItem(this)">Editar</button>
+    <button onclick="deleteItem(this)">Excluir</button>`;
+  container.appendChild(div);
+  inputs[2].value = "";
+  inputs[3].value = "";
+  inputs[4].value = "";
+}
+</script>
+
+<%- include('partials/footer') %>
