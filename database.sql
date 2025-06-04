@@ -37,7 +37,8 @@ CREATE TABLE projetos (
 -- Tecnologias
 CREATE TABLE tecnologias (
     codigo INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50)
+    nome VARCHAR(50),
+    classe VARCHAR(50)
 );
 
 -- Relação N:N entre projetos e tecnologias
@@ -105,6 +106,26 @@ CREATE TABLE softskills (
     codigo INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50)
 );
+
+INSERT INTO tecnologias (nome, classe) VALUES
+('Python', 'python'),
+('Flask', 'flask'),
+('HTML', 'html'),
+('CSS', 'css'),
+('MySQL', 'mysql'),
+('JavaScript', 'javascript'),
+('Java', 'java'),
+('Ollama', 'ollama'),
+('MiniCPM-V', 'minicpmv'),
+('Java Effects', 'javaeffects'),
+('Gemma:2b', 'gemma2b'),
+('Tesseract', 'tesseract'),
+('Pandas', 'pandas'),
+('Mathplot', 'mathplot'),
+('TypeScript', 'typescript'),
+('Node', 'node'),
+('PostgreSQL', 'postgresql');
+
 
 INSERT INTO main (nome, introducao, imagem) VALUES (
   'Eduardo Fonseca Ribeiro',
@@ -203,9 +224,6 @@ INSERT INTO tecnologias (nome) VALUES
 ('Java Effects'), ('Gemma:2b'), ('Tesseract'),
 ('Pandas'), ('Mathplot'), ('TypeScript'), ('Node'), ('PostgreSQL');
 
-SELECT codigo, titulo FROM projetos;
-SELECT * FROM tecnologias;
-
 INSERT INTO tecnologiasProjetos (codigoProjeto, codigoTecnologia) VALUES
 (1, 1),
 (1, 2),
@@ -236,19 +254,3 @@ INSERT INTO tecnologiasProjetos (codigoProjeto, codigoTecnologia) VALUES
 (5, 6),
 (5, 16),
 (5, 17);
-
--- Adiciona a nova coluna
-ALTER TABLE tecnologias ADD classe VARCHAR(50);
-
--- Atualiza os valores da coluna com os nomes das classes CSS
-UPDATE tecnologias SET classe = 'cpp' WHERE nome = 'C++';
-UPDATE tecnologias SET classe = 'python' WHERE nome = 'Python';
-UPDATE tecnologias SET classe = 'java' WHERE nome = 'Java';
-UPDATE tecnologias SET classe = 'csharp' WHERE nome = 'C#';
-UPDATE tecnologias SET classe = 'flask' WHERE nome = 'Flask';
-UPDATE tecnologias SET classe = 'html' WHERE nome = 'HTML';
-UPDATE tecnologias SET classe = 'css' WHERE nome = 'CSS';
-UPDATE tecnologias SET classe = 'javascript' WHERE nome = 'JavaScript';
-UPDATE tecnologias SET classe = 'typescript' WHERE nome = 'TypeScript';
-UPDATE tecnologias SET classe = 'node' WHERE nome = 'Node';
-UPDATE tecnologias SET classe = 'mysql' WHERE nome = 'MySQL';
