@@ -3,7 +3,8 @@ USE portifolio;
 
 -- Usuário do sistema (futuro login/admin)
 CREATE TABLE login (
-    email VARCHAR(100) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(100) NOT NULL
 );
 
@@ -254,3 +255,7 @@ INSERT INTO tecnologiasProjetos (codigoProjeto, codigoTecnologia) VALUES
 (5, 6),
 (5, 16),
 (5, 17);
+
+-- ADD USUÁRIO DE ADM
+INSERT INTO login (email, senha, link) VALUES
+('admin', '1234');
