@@ -1,20 +1,44 @@
-
 const express = require('express');
+const session = require('express-session');
+require('dotenv').config();
+
 const app = express();
 const path = require('path');
-const db = require('./db');
 
-const { getCurriculoData } = require('./models/curriculoModel');
-const { getProjetos } = require('./models/projetosModel');
-const { getIndexData } = require('./models/indexModel');
+// Funções auxiliares para carregar dados das páginas
+const { getCurriculoData } = require('./public/js/getCurriculo');
+const { getProjetos } = require('./public/js/getProjetos');
+const { getIndexData } = require('./public/js/getIndex');
+const protegerRota = require('./middlewares/auth');
 
+// Configuração do EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// Arquivos estáticos (CSS, JS, imagens)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware para interpretar JSON e form-urlencoded
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ⚠️ Sessão precisa vir antes das rotas
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}));
+
+// ⚠️ Rotas que usam req.session devem vir depois da sessão
+const loginRoute = require('./routes/loginRoute');
+app.use('/', loginRoute); // Disponibiliza /verifyLogin
+
+const projetosRoute = require('./routes/projetosRoute');
+app.use('/', projetosRoute); // Ativa as rotas de projetos
+
+
+// Rotas principais do site público
 app.get('/', async (req, res) => {
   const { nome, introducao, contatos } = await getIndexData();
   res.render('index', {
@@ -46,30 +70,17 @@ app.get('/curriculo', async (req, res) => {
   });
 });
 
-// Rotas API para edição dinâmica
-
-app.get('/adm/curriculo', async (req, res) => {
-  const dados = await getCurriculoData();
-  res.render('editCurricul', {
-    page: 'curriculo',
-    nome: 'Eduardo Fonseca Ribeiro',
-    ...dados,
-    anoAtual: new Date().getFullYear()
-  });
-});
-
+// Página de login (GET)
 app.get('/adm', async (req, res) => {
-  const { nome, introducao, contatos } = await getIndexData();
-  res.render('editIndex', {
-    page: 'index',
-    nome,
-    introducao,
-    contatos,
+  res.render('login', {
+    page: 'login',
+    nome: 'Eduardo Fonseca Ribeiro',
     anoAtual: new Date().getFullYear()
   });
 });
 
-app.get('/adm/projetos', async (req, res) => {
+
+app.get('/adm/projetos', protegerRota, async (req, res) => {
   const projetos = await getProjetos();
   res.render('editProjetos', {
     page: 'projetos',
@@ -79,57 +90,7 @@ app.get('/adm/projetos', async (req, res) => {
   });
 });
 
-// CURRÍCULO
-app.post('/api/curriculo', async (req, res) => {
-  const { tipo, data } = req.body;
-  res.json({ status: 'ok', message: 'Entrada adicionada (mock)' });
-});
-
-app.put('/api/curriculo/:id', async (req, res) => {
-  const { id } = req.params;
-  const { tipo, data } = req.body;
-  res.json({ status: 'ok', message: `Entrada ${id} atualizada (mock)` });
-});
-
-app.delete('/api/curriculo/:id', async (req, res) => {
-  const { id } = req.params;
-  res.json({ status: 'ok', message: `Entrada ${id} deletada (mock)` });
-});
-
-// PROJETOS
-app.post('/api/projetos', async (req, res) => {
-  const { titulo, descricao, tecnologias, link } = req.body;
-  res.json({ status: 'ok', message: 'Projeto adicionado (mock)' });
-});
-
-app.put('/api/projetos/:id', async (req, res) => {
-  const { id } = req.params;
-  const { titulo, descricao, tecnologias, link } = req.body;
-  res.json({ status: 'ok', message: `Projeto ${id} atualizado (mock)` });
-});
-
-app.delete('/api/projetos/:id', async (req, res) => {
-  const { id } = req.params;
-  res.json({ status: 'ok', message: `Projeto ${id} deletado (mock)` });
-});
-
-// CONTATOS
-app.post('/api/contatos', async (req, res) => {
-  const { tipo, valor } = req.body;
-  res.json({ status: 'ok', message: 'Contato adicionado (mock)' });
-});
-
-app.put('/api/contatos/:id', async (req, res) => {
-  const { id } = req.params;
-  const { tipo, valor } = req.body;
-  res.json({ status: 'ok', message: `Contato ${id} atualizado (mock)` });
-});
-
-app.delete('/api/contatos/:id', async (req, res) => {
-  const { id } = req.params;
-  res.json({ status: 'ok', message: `Contato ${id} deletado (mock)` });
-});
-
+// Inicia o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Servidor rodando em: http://localhost:${PORT}`);
