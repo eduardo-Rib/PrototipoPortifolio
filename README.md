@@ -1,35 +1,50 @@
 # 📘 Portfólio Pessoal — Engenharia de Software II
 
-Este é um projeto de portfólio acadêmico desenvolvido como parte da disciplina de **Engenharia de Software II**, com o objetivo de apresentar de forma clara e atrativa a trajetória educacional, habilidades técnicas e projetos relevantes do aluno.
+Este projeto é um portfólio acadêmico desenvolvido para a disciplina **Engenharia de Software II**, com o objetivo de apresentar de forma clara, dinâmica e profissional a trajetória educacional, habilidades técnicas e projetos relevantes do aluno.
 
 ---
 
 ## 🎯 Objetivo
 
-Um portfólio acadêmico é uma ferramenta essencial para apresentar sua trajetória educacional, competências técnicas e projetos relevantes. Ele deve ser estruturado de maneira lógica, clara e visualmente agradável, demonstrando seu potencial de forma objetiva e envolvente.
-
-Seu portfólio deve contar sua história acadêmica de forma clara, estratégica e atrativa. Ele é mais do que uma vitrine: é uma ferramenta poderosa para abrir portas acadêmicas e profissionais. Com uma estrutura bem planejada e atualizações constantes, você estará sempre preparado para novas oportunidades.
+Um portfólio acadêmico bem estruturado é uma poderosa ferramenta para mostrar sua evolução, competências técnicas e projetos, abrindo portas para oportunidades acadêmicas e profissionais. O projeto foca em clareza, usabilidade e atualização constante.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-- [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
-- [EJS](https://ejs.co/)
-- HTML5 / CSS3
-- JavaScript (Frontend)
-- Bootstrap (em alguns estilos)
+- **Backend:**
+  - [Node.js](https://nodejs.org/) (v16+)
+  - [Express](https://expressjs.com/) para criação de API RESTful
+  - [MySQL](https://www.mysql.com/) como banco de dados relacional
+  - [mysql2](https://www.npmjs.com/package/mysql2) para conexão e queries assíncronas
+
+- **Frontend:**
+  - [EJS](https://ejs.co/) para templates dinâmicos no servidor
+  - JavaScript moderno (ES6+) com fetch API para requisições assíncronas (POST, DELETE, PUT)
+  - HTML5 semântico e CSS3 personalizado
+  - Bootstrap (uso pontual para alguns estilos)
+
+- **Outros:**
+  - Nodemon para desenvolvimento com reload automático
+  - Estrutura MVC simples para organização do código
 
 ---
-
 
 ## 💻 Pré-requisitos
 
-- Node.js instalado na máquina (v16 ou superior)
+- Node.js instalado (versão 16 ou superior)
+- MySQL instalado e configurado
 - Editor de código (VS Code recomendado)
 
 ---
+
+## ⚙️ Configuração do ambiente
+
+Este projeto utiliza um arquivo `.env` para armazenar a **chave secreta de sessão**. Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+
+```env
+SESSION_SECRET='sua_chave_secreta_aqui'
+```
 
 ## ▶️ Como rodar o projeto
 
@@ -37,14 +52,17 @@ Seu portfólio deve contar sua história acadêmica de forma clara, estratégica
 # Clone o repositório
 git clone https://github.com/seuusuario/meu-portfolio.git
 
-# Acesse a pasta do projeto
+# Entre na pasta do projeto
 cd meu-portfolio
 
 # Instale as dependências
 npm install
 
+# Configure seu banco MySQL com o script SQL fornecido
+
 # Inicie o servidor
 node app.js
+
 ```
 
 Acesse no navegador: [http://localhost:3000](http://localhost:3000)
