@@ -1,3 +1,4 @@
+/* EXISTENTE */
 .tech-stack {
     margin: 0.5em 0;
 }
@@ -27,6 +28,7 @@
     color: #333;
 }
 
+/* TAG COLORS */
 .tech-tag.cpp { background-color: #00599C; color: #fff; }
 .tech-tag.python { background-color: #3776AB; color: #fff; }
 .tech-tag.java { background-color: #f89820; color: #fff; }
@@ -38,3 +40,60 @@
 .tech-tag.typescript { background-color: #007acc; color: #fff; }
 .tech-tag.node { background-color: #68a063; color: #fff; }
 .tech-tag.mysql { background-color: #00758F; color: #fff; }
+
+/* NOVOS ELEMENTOS */
+
+/* Inputs para edição e adição */
+.projeto-item input[type="text"],
+.form-inline input[type="text"] {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    padding: 8px;
+    margin: 0.5em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Botões de ação */
+button {
+    padding: 8px 14px;
+    margin-right: 8px;
+    margin-top: 0.5em;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Botão de Editar/Salvar */
+button.edit {
+    background-color: #2196f3;
+    color: white;
+}
+
+button.edit:hover {
+    background-color: #0b7dda;
+}
+
+/* Botão de Excluir */
+button.delete {
+    background-color: #e53935;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #c62828;
+}
+
+/* Botão de Adicionar Projeto */
+.form-inline button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.form-inline button:hover {
+    background-color: #388e3c;
+}
