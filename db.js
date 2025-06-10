@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise');
 const db = mysql.createPool({
   host: 'localhost',       // ou IP do banco
   user: 'root',     // ex: 'root'
-  password: 'fatec',   // ex: '1234'
+  password: 'eduardo',   // ex: '1234'
   database: 'portifolio', // substitua pelo nome real do banco
   waitForConnections: true,
   connectionLimit: 10,

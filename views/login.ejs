@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form onsubmit="login(event)">
+            <input type="text" id="usuario" placeholder="Usuário" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <script src="/js/login.js"></script>
+
+<%- include('partials/footer') %>

@@ -10,8 +10,10 @@
   "license": "ISC",
   "description": "Este é um projeto de portfólio acadêmico desenvolvido como parte da disciplina de **Engenharia de Software II**, com o objetivo de apresentar de forma clara e atrativa a trajetória educacional, habilidades técnicas e projetos relevantes do aluno.",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.1",
     "mysql2": "^3.14.1"
   },
   "repository": {
